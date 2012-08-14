@@ -12,9 +12,9 @@ namespace MonadTests
         [TestMethod]
         public void Add_5_to_Nothing_returns_Nothing()
         {
-            var result = from x in 5.ToMaybe()
-                    from y in Maybe<int>.Nothing
-                    select x + y;
+            var result = 5.ToMaybe().Bind(  a => 
+                Maybe<int>.Nothing.Bind(    b => 
+                (a + b).ToMaybe()));
 
             Assert.AreEqual(result, Maybe<int>.Nothing);
 
@@ -24,9 +24,9 @@ namespace MonadTests
         [TestMethod]
         public void Add_5_to_3_returns_8()
         {
-            var result = from x in 5.ToMaybe()
-                    from y in 3.ToMaybe()
-                    select x + y;
+            var result = 5.ToMaybe().Bind(  a =>
+                3.ToMaybe().Bind(           b =>
+                (a + b).ToMaybe()));
 
             Assert.AreEqual(result.Value, 8);
 
@@ -52,6 +52,30 @@ namespace MonadTests
         }
 
         [TestMethod]
+        public void Add_5_to_Nothing_returns_Nothing_linq_style()
+        {
+            var result = from x in 5.ToMaybe()
+                         from y in Maybe<int>.Nothing
+                         select x + y;
+
+            Assert.AreEqual(result, Maybe<int>.Nothing);
+
+            Console.Out.WriteLine(result.HasValue ? result.Value.ToString() : "Nothing");
+        }
+
+        [TestMethod]
+        public void Add_5_to_3_returns_8_linq_style()
+        {
+            var result = from x in 5.ToMaybe()
+                         from y in 3.ToMaybe()
+                         select x + y;
+
+            Assert.AreEqual(result.Value, 8);
+
+            Console.Out.WriteLine(result.HasValue ? result.Value.ToString() : "Nothing");
+        }
+
+        [TestMethod]
         public void Add_string_to_int_to_datetime_returns_string_linq_style()
         {
             var today = DateTime.Now;
@@ -68,7 +92,7 @@ namespace MonadTests
         }
 
         [TestMethod]
-        public void Divide_12_by_2_by_2_returns_3()
+        public void Divide_12_by_2_and_then_by_2_returns_3()
         {
             var result = from a in 12.Div(2)
                          from b in a.Div(2)
@@ -80,7 +104,7 @@ namespace MonadTests
         }
 
         [TestMethod]
-        public void Divide_12_by_0_by_2_returns_Nothing()
+        public void Divide_12_by_0_and_then_by_2_returns_Nothing()
         {
             var result = from a in "Result: ".ToMaybe()
                          from b in 12.Div(0)
