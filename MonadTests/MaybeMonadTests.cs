@@ -18,7 +18,7 @@ namespace MonadTests
 
             Assert.AreEqual(result, Maybe<int>.Nothing);
 
-            Console.Out.WriteLine(result.HasValue ? result.Value.ToString() : "Nothing");
+            Console.Out.WriteLine(result);
         }
 
         [TestMethod]
@@ -30,7 +30,7 @@ namespace MonadTests
 
             Assert.AreEqual(result.Value, 8);
 
-            Console.Out.WriteLine(result.HasValue ? result.Value.ToString() : "Nothing");
+            Console.Out.WriteLine(result);
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace MonadTests
 
             Assert.AreEqual(result.Value, "Hello 2 all of you today on " + today.ToShortDateString());
 
-            Console.Out.WriteLine(result.HasValue ? result.Value : "Nothing");
+            Console.Out.WriteLine(result);
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace MonadTests
 
             Assert.AreEqual(result, Maybe<int>.Nothing);
 
-            Console.Out.WriteLine(result.HasValue ? result.Value.ToString() : "Nothing");
+            Console.Out.WriteLine(result);
         }
 
         [TestMethod]
@@ -72,7 +72,7 @@ namespace MonadTests
 
             Assert.AreEqual(result.Value, 8);
 
-            Console.Out.WriteLine(result.HasValue ? result.Value.ToString() : "Nothing");
+            Console.Out.WriteLine(result);
         }
 
         [TestMethod]
@@ -88,7 +88,7 @@ namespace MonadTests
 
             Assert.AreEqual(result.Value, "Hello 2 all of you today on " + today.ToShortDateString());
 
-            Console.Out.WriteLine(result.HasValue ? result.Value : "Nothing");
+            Console.Out.WriteLine(result);
         }
 
         [TestMethod]
